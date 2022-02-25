@@ -11,6 +11,12 @@ git push -u Simple-Express-Project master
 add .gitignore file 
 add /node_modules to .gitignore file
 
+//Publish
+git add -A
+git commit -m "next commit"
+git branch -M master
+git push -u Simple-Express-Project master
+
 Subsequent commits and push
 git add -A
 git commit -m "next commit"
