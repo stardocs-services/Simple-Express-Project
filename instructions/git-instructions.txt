@@ -1,0 +1,18 @@
+To create a new git repo
+Create git repo in github first
+echo "# Simple-Express-Project" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add Simple-Express-Project https://github.com/stardocs-services/Simple-Express-Project.git
+git push -u Simple-Express-Project master
+
+add .gitignore file 
+add /node_modules to .gitignore file
+
+Subsequent commits and push
+git add -A
+git commit -m "next commit"
+git branch -M master
+git push -u Simple-Express-Project master

@@ -1,0 +1,62 @@
+npx sequelize
+
+//To start
+npx sequelize init
+
+//To force start
+npx sequelize init --force
+
+//Manual Migration
+https://sequelize.org/master/manual/migrations.html
+npx sequelize migration:create --name initial_migration
+
+npx sequelize db:migrate
+
+//Create Model
+//User
+npx sequelize-cli model:generate --name User --attributes Id:uuid,Name:string,UserName:string,Email:string,Password:string,PhoneNumber:string,MobileNumber:string,DateOfBirth:Date,LockoutEnabled:boolean,LockoutEnd:Date
+//Role
+npx sequelize-cli model:generate --name Role --attributes Id:uuid,Name:string
+//UserRole
+npx sequelize-cli model:generate --name UserRole --attributes Id:uuid,UserId:string,RoleId:string
+
+
+//Seed Data
+npx sequelize-cli seed:generate --name user-seed
+npx sequelize-cli seed:generate --name role-seed
+npx sequelize-cli seed:generate --name userrole-seed
+
+//Seed Action
+npx sequelize-cli db:seed:all
+
+//Change Id to UUID
+//In the model migration file change:
+Id: {
+    type: Sequelize.UUID,
+    primaryKey: true,
+    allowNull: false,
+    defaultValue: Sequelize.UUIDV4,
+},
+
+In the model file add just below the class:
+static init(sequelize) {
+    super.init(
+    {
+        name: Sequelize.STRING,
+    },
+    {
+        sequelize,
+    }
+    );
+    this.addHook('beforeSave', async (user) => {
+    return user.id = uuid();
+    });
+
+    return this;
+}
+
+//In the model file add below modelName:
+
+    define: {
+      freezeTableName: true
+    }
