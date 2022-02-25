@@ -22,6 +22,9 @@ async function initializeDatabase() {
 
 initializeDatabase();
 
+const user = require('./routes/user');
+app.use('/api/user',user);
+
 // initialize();
 // async function initialize() {
 //     // create db if it doesn't already exist
